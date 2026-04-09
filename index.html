@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dawid Bachurzewski — IT Consultant</title>
+  <meta name="description" content="Dawid Bachurzewski — Senior IT Consultant specialising in Microsoft Azure, Cloud Infrastructure, and IT Strategy & Digital Transformation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-900: #0d1b2a;
+      --blue-800: #1b2e45;
+      --blue-600: #1e4d8c;
+      --blue-500: #2563eb;
+      --blue-400: #3b82f6;
+      --blue-100: #dbeafe;
+      --blue-50:  #eff6ff;
+      --slate-700: #334155;
+      --slate-500: #64748b;
+      --slate-300: #cbd5e1;
+      --slate-100: #f1f5f9;
+      --white:    #ffffff;
+      --radius:   8px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 10px 32px rgba(0,0,0,.12);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--slate-700);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-300);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 700; color: var(--blue-600);
+      text-decoration: none; letter-spacing: -.3px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .9rem; font-weight: 500;
+      color: var(--slate-700); transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--blue-500); }
+    .nav-cta {
+      background: var(--blue-500); color: var(--white);
+      padding: .45rem 1.1rem; border-radius: var(--radius);
+      font-size: .88rem; font-weight: 600; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--blue-600); transform: translateY(-1px); }
+
+    /* ── HERO ─────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 60%, var(--blue-600) 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 7rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      color: var(--blue-100); font-size: .8rem; font-weight: 500;
+      padding: .3rem .9rem; border-radius: 99px; margin-bottom: 1.5rem;
+      letter-spacing: .5px; text-transform: uppercase;
+    }
+    .hero-content { position: relative; max-width: 740px; }
+    .hero-name {
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; color: var(--white);
+      letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: .6rem;
+    }
+    .hero-title {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 400; color: var(--blue-100);
+      margin-bottom: 1.5rem;
+    }
+    .hero-tagline {
+      font-size: 1.05rem; color: rgba(255,255,255,.7);
+      max-width: 560px; margin: 0 auto 2.5rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue-400); color: var(--white);
+      padding: .8rem 2rem; border-radius: var(--radius);
+      font-weight: 600; font-size: .95rem; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--blue-500); transform: translateY(-2px); }
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,.4);
+      padding: .78rem 2rem; border-radius: var(--radius);
+      font-weight: 600; font-size: .95rem; text-decoration: none;
+      transition: border-color .2s, transform .15s;
+    }
+    .btn-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+      margin-top: 4rem; padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      display: block; font-size: 2rem; font-weight: 800;
+      color: var(--white); line-height: 1;
+    }
+    .stat-label { font-size: .8rem; color: rgba(255,255,255,.6); margin-top: .25rem; }
+
+    /* ── SECTIONS SHARED ─────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1080px; margin: 0 auto; }
+    .section-label {
+      display: inline-block; color: var(--blue-500);
+      font-size: .8rem; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; margin-bottom: .75rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      font-weight: 800; color: var(--blue-900);
+      letter-spacing: -.5px; margin-bottom: 1rem;
+    }
+    .section-sub {
+      color: var(--slate-500); font-size: 1rem; max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* ── SERVICES ─────────────────────────────────────── */
+    #services { background: var(--slate-100); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--white); border-radius: 12px;
+      padding: 2rem; box-shadow: var(--shadow-sm);
+      border: 1px solid var(--slate-300);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .service-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--blue-50); border: 1px solid var(--blue-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.2rem;
+    }
+    .service-title {
+      font-size: 1.05rem; font-weight: 700; color: var(--blue-900);
+      margin-bottom: .5rem;
+    }
+    .service-desc { font-size: .92rem; color: var(--slate-500); line-height: 1.65; }
+    .service-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.2rem; }
+    .tag {
+      background: var(--blue-50); color: var(--blue-600);
+      font-size: .75rem; font-weight: 600; padding: .2rem .65rem;
+      border-radius: 99px; border: 1px solid var(--blue-100);
+    }
+
+    /* ── SKILLS ───────────────────────────────────────── */
+    #skills { background: var(--white); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--slate-100); border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      display: flex; align-items: center; gap: 1rem;
+      border: 1px solid var(--slate-300);
+      transition: background .2s, border-color .2s;
+    }
+    .skill-card:hover { background: var(--blue-50); border-color: var(--blue-100); }
+    .skill-logo {
+      width: 40px; height: 40px; object-fit: contain; flex-shrink: 0;
+      border-radius: 6px;
+    }
+    .skill-logo-placeholder {
+      width: 40px; height: 40px; flex-shrink: 0; border-radius: 6px;
+      background: var(--blue-500); color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; font-weight: 700;
+    }
+    .skill-name {
+      font-size: .92rem; font-weight: 600; color: var(--blue-900);
+    }
+    .skill-level {
+      font-size: .75rem; color: var(--slate-500); margin-top: .1rem;
+    }
+
+    /* ── CONTACT ──────────────────────────────────────── */
+    #contact {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-800) 100%);
+    }
+    #contact .section-title { color: var(--white); }
+    #contact .section-sub { color: rgba(255,255,255,.65); }
+    #contact .section-label { color: var(--blue-400); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    @media(max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      color: rgba(255,255,255,.8); text-decoration: none;
+      font-size: .95rem; transition: color .2s;
+    }
+    .contact-link:hover { color: var(--white); }
+    .contact-link-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+      transition: background .2s;
+    }
+    .contact-link:hover .contact-link-icon { background: rgba(255,255,255,.18); }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: .85rem; }
+    .form-group { display: flex; flex-direction: column; gap: .35rem; }
+    .form-group label { font-size: .82rem; font-weight: 600; color: rgba(255,255,255,.7); }
+    .form-group input, .form-group textarea {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: var(--radius); color: var(--white);
+      font-family: inherit; font-size: .92rem;
+      padding: .7rem 1rem; outline: none;
+      transition: border-color .2s, background .2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder {
+      color: rgba(255,255,255,.3);
+    }
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: var(--blue-400);
+      background: rgba(255,255,255,.12);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-form {
+      background: var(--blue-400); color: var(--white);
+      border: none; border-radius: var(--radius);
+      padding: .8rem 1.6rem; font-size: .95rem; font-weight: 600;
+      cursor: pointer; align-self: flex-start;
+      font-family: inherit;
+      transition: background .2s, transform .15s;
+    }
+    .btn-form:hover { background: var(--blue-500); transform: translateY(-1px); }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--blue-900); border-top: 1px solid rgba(255,255,255,.06);
+      padding: 1.5rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: .5rem;
+    }
+    footer p { font-size: .82rem; color: rgba(255,255,255,.4); }
+    footer a { color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+    footer a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media(max-width: 768px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      section { padding: 3.5rem 1.2rem; }
+      .hero-stats { gap: 2rem; }
+    }
+
+    /* ── SCROLL FADE-IN ───────────────────────────────── */
+    .fade-in {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">DB.</a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <span class="hero-badge">Available for Consulting</span>
+      <h1 class="hero-name">Dawid Bachurzewski</h1>
+      <p class="hero-title">IT Consultant &amp; Microsoft Azure Specialist</p>
+      <p class="hero-tagline">
+        Helping organisations modernise their infrastructure, adopt cloud technology,
+        and execute successful digital transformation strategies.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+        <a href="#services" class="btn-outline">View Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">10+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">50+</span>
+          <span class="stat-label">Projects Delivered</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">30+</span>
+          <span class="stat-label">Happy Clients</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <span class="section-label fade-in">What I Do</span>
+      <h2 class="section-title fade-in">Services</h2>
+      <p class="section-sub fade-in">
+        End-to-end consulting from strategy through implementation — helping your
+        business get the most out of modern IT.
+      </p>
+      <div class="services-grid">
+
+        <div class="service-card fade-in">
+          <div class="service-icon">☁️</div>
+          <div class="service-title">Cloud Infrastructure</div>
+          <p class="service-desc">
+            Design, migration, and management of scalable cloud environments on
+            Microsoft Azure. From IaaS to serverless — optimised for performance,
+            security, and cost.
+          </p>
+          <div class="service-tags">
+            <span class="tag">Azure</span>
+            <span class="tag">IaC</span>
+            <span class="tag">DevOps</span>
+            <span class="tag">Hybrid Cloud</span>
+          </div>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">🏗️</div>
+          <div class="service-title">IT Strategy &amp; Digital Transformation</div>
+          <p class="service-desc">
+            Advisory services for organisations navigating digital change. Roadmap
+            creation, technology selection, vendor management, and stakeholder
+            alignment to drive lasting value.
+          </p>
+          <div class="service-tags">
+            <span class="tag">IT Roadmap</span>
+            <span class="tag">Change Mgmt</span>
+            <span class="tag">M365</span>
+          </div>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">🛡️</div>
+          <div class="service-title">Microsoft 365 &amp; Productivity</div>
+          <p class="service-desc">
+            Full Microsoft 365 deployment, governance, and adoption programmes —
+            including Teams, SharePoint, Exchange Online, Intune, and Entra ID.
+          </p>
+          <div class="service-tags">
+            <span class="tag">Teams</span>
+            <span class="tag">SharePoint</span>
+            <span class="tag">Intune</span>
+            <span class="tag">Entra ID</span>
+          </div>
+        </div>
+
+        <div class="service-card fade-in">
+          <div class="service-icon">⚙️</div>
+          <div class="service-title">Automation &amp; Scripting</div>
+          <p class="service-desc">
+            Reducing manual overhead through intelligent automation — PowerShell
+            scripts, Azure Automation, Logic Apps, and custom tooling tailored to
+            your workflows.
+          </p>
+          <div class="service-tags">
+            <span class="tag">PowerShell</span>
+            <span class="tag">Azure Automation</span>
+            <span class="tag">Logic Apps</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <span class="section-label fade-in">Expertise</span>
+      <h2 class="section-title fade-in">Tech Stack &amp; Tools</h2>
+      <p class="section-sub fade-in">
+        A deep Microsoft-first skill set, complemented by broad infrastructure and
+        automation expertise.
+      </p>
+      <div class="skills-grid">
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">Az</div>
+          <div>
+            <div class="skill-name">Microsoft Azure</div>
+            <div class="skill-level">Cloud Platform</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">M3</div>
+          <div>
+            <div class="skill-name">Microsoft 365</div>
+            <div class="skill-level">Productivity Suite</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">PS</div>
+          <div>
+            <div class="skill-name">PowerShell</div>
+            <div class="skill-level">Scripting &amp; Automation</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">WS</div>
+          <div>
+            <div class="skill-name">Windows Server</div>
+            <div class="skill-level">Infrastructure</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">AD</div>
+          <div>
+            <div class="skill-name">Active Directory / Entra ID</div>
+            <div class="skill-level">Identity &amp; Access</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">IT</div>
+          <div>
+            <div class="skill-name">Microsoft Intune</div>
+            <div class="skill-level">Endpoint Management</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">SP</div>
+          <div>
+            <div class="skill-name">SharePoint</div>
+            <div class="skill-level">Collaboration &amp; Intranet</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">HV</div>
+          <div>
+            <div class="skill-name">Hyper-V / Virtualisation</div>
+            <div class="skill-level">Infrastructure</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">DV</div>
+          <div>
+            <div class="skill-name">Azure DevOps</div>
+            <div class="skill-level">CI/CD &amp; ALM</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">TF</div>
+          <div>
+            <div class="skill-name">Terraform</div>
+            <div class="skill-level">Infrastructure as Code</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">GH</div>
+          <div>
+            <div class="skill-name">GitHub</div>
+            <div class="skill-level">Version Control &amp; Actions</div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-logo-placeholder">PJ</div>
+          <div>
+            <div class="skill-name">Project Management</div>
+            <div class="skill-level">PRINCE2 / Agile</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div>
+          <span class="section-label fade-in">Let's Talk</span>
+          <h2 class="section-title fade-in">Ready to Transform<br/>Your IT?</h2>
+          <p class="section-sub fade-in">
+            Whether you need strategic advice, a hands-on implementation partner,
+            or just want to explore what's possible — I'd love to hear from you.
+          </p>
+          <div class="contact-links">
+            <a href="https://pl.linkedin.com/in/dawid-bachurzewski-6399b310a" target="_blank" rel="noopener" class="contact-link fade-in">
+              <div class="contact-link-icon">in</div>
+              <span>LinkedIn — Connect with me</span>
+            </a>
+            <a href="https://github.com/bachur90" target="_blank" rel="noopener" class="contact-link fade-in">
+              <div class="contact-link-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/>
+                </svg>
+              </div>
+              <span>GitHub — bachur90</span>
+            </a>
+            <a href="mailto:dawid@bachurzewski.pl" class="contact-link fade-in">
+              <div class="contact-link-icon">✉</div>
+              <span>dawid@bachurzewski.pl</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <form class="contact-form fade-in" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@company.com" required />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="Cloud migration project" />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell me about your project or challenge…" required></textarea>
+            </div>
+            <button type="submit" class="btn-form">Send Message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Dawid Bachurzewski. All rights reserved.</p>
+    <p><a href="https://github.com/bachur90" target="_blank" rel="noopener">github.com/bachur90</a></p>
+  </footer>
+
+  <script>
+    // Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Simple form handler (replace with backend/Formspree endpoint)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.btn-form');
+      btn.textContent = 'Message Sent ✓';
+      btn.style.background = '#16a34a';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Send Message →';
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
