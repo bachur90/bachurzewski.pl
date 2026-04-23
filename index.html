@@ -181,7 +181,56 @@
     .hero-panel-a {
       background: linear-gradient(150deg, #071a0f 0%, var(--a-900) 65%, var(--a-800) 100%);
     }
-    .hero-inner { position: relative; max-width: 360px; }
+
+    /* Floating orbs */
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(55px);
+      pointer-events: none;
+      opacity: 0;
+      animation: orb-fade-in .8s ease forwards, orb-float linear infinite;
+    }
+    @keyframes orb-fade-in { to { opacity: 1; } }
+    @keyframes orb-float {
+      0%   { transform: translateY(0)   translateX(0)   rotate(0deg); }
+      25%  { transform: translateY(-18px) translateX(10px) rotate(5deg); }
+      50%  { transform: translateY(8px)  translateX(-8px) rotate(-3deg); }
+      75%  { transform: translateY(-12px) translateX(14px) rotate(8deg); }
+      100% { transform: translateY(0)   translateX(0)   rotate(0deg); }
+    }
+    .hero-panel-d .hero-orb:nth-child(1) {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(37,99,235,.35), transparent 70%);
+      top: 10%; right: 5%; animation-duration: .8s, 9s; animation-delay: 0s, 0s;
+    }
+    .hero-panel-d .hero-orb:nth-child(2) {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(59,130,246,.25), transparent 70%);
+      bottom: 18%; left: 8%; animation-duration: .8s, 12s; animation-delay: .2s, .2s;
+    }
+    .hero-panel-d .hero-orb:nth-child(3) {
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, rgba(147,197,253,.2), transparent 70%);
+      top: 55%; right: 20%; animation-duration: .8s, 7s; animation-delay: .4s, .4s;
+    }
+    .hero-panel-a .hero-orb:nth-child(1) {
+      width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(5,150,105,.35), transparent 70%);
+      top: 10%; left: 5%; animation-duration: .8s, 10s; animation-delay: 0s, 0s;
+    }
+    .hero-panel-a .hero-orb:nth-child(2) {
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(16,185,129,.25), transparent 70%);
+      bottom: 18%; right: 8%; animation-duration: .8s, 13s; animation-delay: .2s, .2s;
+    }
+    .hero-panel-a .hero-orb:nth-child(3) {
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, rgba(110,231,183,.2), transparent 70%);
+      top: 55%; left: 20%; animation-duration: .8s, 8s; animation-delay: .4s, .4s;
+    }
+
+    .hero-inner { position: relative; max-width: 360px; z-index: 1; }
     .hero-badge {
       display: inline-block;
       font-size: .7rem; font-weight: 700; letter-spacing: .9px;
@@ -228,9 +277,9 @@
       display: inline-block; padding: .72rem 1.85rem;
       border-radius: var(--radius); font-weight: 700;
       font-size: .88rem; text-decoration: none;
-      transition: transform .2s, opacity .2s;
+      transition: transform .2s, opacity .2s, box-shadow .2s;
     }
-    .hero-cta:hover { transform: translateY(-2px); opacity: .88; }
+    .hero-cta:hover { transform: translateY(-2px); opacity: .92; box-shadow: 0 8px 24px rgba(0,0,0,.3); }
     .hero-cta-d { background: var(--d-400); color: var(--white); }
     .hero-cta-a { background: var(--a-400); color: var(--white); }
 
@@ -239,6 +288,71 @@
       .hero-panel { padding: 4rem 2rem 3.5rem; }
       .hero-panel-d { border-right: none; border-bottom: 1px solid rgba(255,255,255,.05); }
       .hero-stats { gap: 1rem; }
+    }
+
+    /* ── COMBINED IMPACT BANNER ──────────────────────────── */
+    #impact {
+      background: var(--gray-900);
+      padding: 4rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    #impact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(37,99,235,.08) 0%,
+        transparent 40%,
+        rgba(5,150,105,.08) 100%);
+      pointer-events: none;
+    }
+    .impact-inner {
+      max-width: 1100px; margin: 0 auto;
+      position: relative; z-index: 1;
+    }
+    .impact-label {
+      text-align: center; margin-bottom: 2.5rem;
+    }
+    .impact-label span {
+      font-size: .7rem; font-weight: 700; letter-spacing: 1.4px;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+    }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .impact-item {
+      background: rgba(255,255,255,.03);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      transition: background .2s;
+    }
+    .impact-item:hover { background: rgba(255,255,255,.06); }
+    .impact-icon {
+      font-size: 1.8rem; margin-bottom: 1rem;
+      display: block; line-height: 1;
+    }
+    .impact-num {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      font-weight: 900; color: var(--white);
+      letter-spacing: -2px; line-height: 1;
+      display: block; margin-bottom: .4rem;
+    }
+    .impact-num-d { background: linear-gradient(135deg, var(--d-400), var(--d-100)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .impact-num-a { background: linear-gradient(135deg, var(--a-400), var(--a-100)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .impact-num-w { background: linear-gradient(135deg, #fff, rgba(255,255,255,.7)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .impact-desc {
+      font-size: .78rem; color: rgba(255,255,255,.45);
+      font-weight: 500; letter-spacing: .2px; line-height: 1.5;
+    }
+    @media (max-width: 700px) {
+      .impact-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .impact-grid { grid-template-columns: 1fr; }
     }
 
     /* ── SECTION SHARED ──────────────────────────────────── */
@@ -281,10 +395,15 @@
       background: var(--white); border-radius: var(--radius-lg);
       padding: 1.5rem 1.6rem;
       border: 1px solid var(--gray-200);
+      border-left: 3px solid transparent;
       box-shadow: var(--shadow-sm);
-      transition: transform .2s, box-shadow .2s;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
     }
+    .card-d { border-left-color: var(--d-200, #bfdbfe); }
+    .card-a { border-left-color: var(--a-200, #a7f3d0); }
     .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .card-d:hover { border-left-color: var(--d-400); }
+    .card-a:hover { border-left-color: var(--a-400); }
     .card-icon {
       width: 44px; height: 44px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
@@ -309,33 +428,86 @@
       .split-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
 
+    /* ── HOW WE WORK ─────────────────────────────────────── */
+    #process {
+      background: var(--white);
+      padding: 0 2rem 5rem;
+    }
+    .process-track {
+      max-width: 900px; margin: 3rem auto 0;
+      display: grid; grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start; gap: 0;
+    }
+    .process-step { text-align: center; padding: 0 .5rem; }
+    .process-num {
+      width: 52px; height: 52px; border-radius: 99px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem; font-weight: 900; color: var(--white);
+      margin: 0 auto 1.1rem;
+      position: relative;
+    }
+    .process-num::after {
+      content: '';
+      position: absolute; inset: -4px;
+      border-radius: 99px; z-index: -1;
+      opacity: .2;
+    }
+    .process-num-1 { background: var(--d-500); box-shadow: 0 4px 16px rgba(37,99,235,.35); }
+    .process-num-1::after { background: var(--d-500); }
+    .process-num-2 { background: linear-gradient(135deg, var(--d-400), var(--a-400)); box-shadow: 0 4px 16px rgba(0,0,0,.25); }
+    .process-num-2::after { background: var(--d-400); }
+    .process-num-3 { background: var(--a-500); box-shadow: 0 4px 16px rgba(5,150,105,.35); }
+    .process-num-3::after { background: var(--a-500); }
+    .process-connector {
+      padding-top: 26px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .process-connector svg { display: block; }
+    .process-step-title {
+      font-size: .9rem; font-weight: 700; color: var(--gray-900);
+      margin-bottom: .4rem;
+    }
+    .process-step-desc {
+      font-size: .8rem; color: var(--gray-500); line-height: 1.65;
+    }
+    @media (max-width: 650px) {
+      .process-track {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .process-connector { padding: .5rem 0; transform: rotate(90deg); }
+    }
+
     /* ── EXPERTISE ───────────────────────────────────────── */
-    #expertise { background: var(--white); padding-bottom: 5rem; }
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: .6rem;
+    #expertise { background: var(--off-white); padding-bottom: 5rem; }
+
+    .skill-bars-col { display: flex; flex-direction: column; gap: .9rem; }
+    .skill-bar-row {}
+    .skill-bar-meta {
+      display: flex; justify-content: space-between;
+      align-items: baseline; margin-bottom: .35rem;
     }
-    .skill-pill {
-      padding: .55rem .95rem; border-radius: var(--radius);
-      font-size: .8rem; font-weight: 600;
-      display: flex; align-items: center; gap: .45rem;
-      border: 1px solid transparent;
-      transition: background .18s, border-color .18s;
+    .skill-bar-name {
+      font-size: .82rem; font-weight: 600; color: var(--gray-700);
     }
-    .skill-dot { width: 6px; height: 6px; border-radius: 99px; flex-shrink: 0; }
-    .skill-dot-d { background: var(--d-500); }
-    .skill-dot-a { background: var(--a-500); }
-    .skill-pill-d {
-      background: var(--d-50); color: var(--d-600);
-      border-color: var(--d-100);
+    .skill-bar-level {
+      font-size: .65rem; font-weight: 700; letter-spacing: .5px;
+      text-transform: uppercase; color: var(--gray-500);
     }
-    .skill-pill-d:hover { background: var(--d-100); border-color: var(--d-400); }
-    .skill-pill-a {
-      background: var(--a-50); color: var(--a-600);
-      border-color: var(--a-100);
+    .skill-bar-track {
+      height: 7px; background: var(--gray-200);
+      border-radius: 99px; overflow: hidden;
     }
-    .skill-pill-a:hover { background: var(--a-100); border-color: var(--a-400); }
+    .skill-bar-fill {
+      height: 100%; width: 0; border-radius: 99px;
+      transition: width 1.1s cubic-bezier(.25,.46,.45,.94);
+    }
+    .skill-bar-fill-d {
+      background: linear-gradient(90deg, var(--d-600), var(--d-400));
+    }
+    .skill-bar-fill-a {
+      background: linear-gradient(90deg, var(--a-600), var(--a-400));
+    }
 
     /* ── CONTACT ─────────────────────────────────────────── */
     #contact {
@@ -432,6 +604,7 @@
 
     <ul class="nav-links">
       <li><a href="#services"  data-i18n="nav.services">Services</a></li>
+      <li><a href="#process"   data-i18n="nav.process">How We Work</a></li>
       <li><a href="#expertise" data-i18n="nav.expertise">Expertise</a></li>
       <li><a href="#contact"   data-i18n="nav.contact">Contact</a></li>
     </ul>
@@ -456,6 +629,7 @@
   <!-- Mobile nav -->
   <div class="nav-mobile" id="nav-mobile">
     <a href="#services"  onclick="closeMobile()" data-i18n="nav.services">Services</a>
+    <a href="#process"   onclick="closeMobile()" data-i18n="nav.process">How We Work</a>
     <a href="#expertise" onclick="closeMobile()" data-i18n="nav.expertise">Expertise</a>
     <a href="#contact"   onclick="closeMobile()" data-i18n="nav.contact">Contact</a>
     <hr/>
@@ -478,6 +652,9 @@
 
     <!-- Dawid -->
     <div class="hero-panel hero-panel-d">
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
       <div class="hero-inner">
         <span class="hero-badge hero-badge-d" data-i18n="hero.d.badge">Microsoft Specialist</span>
         <h1 class="hero-name">Dawid<br/>Bachurzewski</h1>
@@ -487,15 +664,15 @@
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-num">10+</span>
+            <span class="stat-num" data-count="10" data-suffix="+">10+</span>
             <span class="stat-lbl" data-i18n="hero.d.stat1">Years Experience</span>
           </div>
           <div class="stat">
-            <span class="stat-num">50+</span>
+            <span class="stat-num" data-count="50" data-suffix="+">50+</span>
             <span class="stat-lbl" data-i18n="hero.d.stat2">Projects Delivered</span>
           </div>
           <div class="stat">
-            <span class="stat-num">30+</span>
+            <span class="stat-num" data-count="30" data-suffix="+">30+</span>
             <span class="stat-lbl" data-i18n="hero.d.stat3">Happy Clients</span>
           </div>
         </div>
@@ -505,6 +682,9 @@
 
     <!-- Agnieszka -->
     <div class="hero-panel hero-panel-a">
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
+      <div class="hero-orb"></div>
       <div class="hero-inner">
         <span class="hero-badge hero-badge-a" data-i18n="hero.a.badge">Project Manager &amp; Auditor</span>
         <h1 class="hero-name">Agnieszka<br/>Polska-Bachurzewska</h1>
@@ -514,15 +694,15 @@
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-num">20+</span>
+            <span class="stat-num" data-count="20" data-suffix="+">20+</span>
             <span class="stat-lbl" data-i18n="hero.a.stat1">Years Experience</span>
           </div>
           <div class="stat">
-            <span class="stat-num">ISO</span>
+            <span class="stat-num" data-suffix="">ISO</span>
             <span class="stat-lbl">27001 Auditor</span>
           </div>
           <div class="stat">
-            <span class="stat-num">ISO</span>
+            <span class="stat-num" data-suffix="">ISO</span>
             <span class="stat-lbl">9001 Auditor</span>
           </div>
         </div>
@@ -530,6 +710,38 @@
       </div>
     </div>
 
+  </section>
+
+
+  <!-- ═══ COMBINED IMPACT ═══════════════════════════════════ -->
+  <section id="impact">
+    <div class="impact-inner">
+      <div class="impact-label fade-in">
+        <span data-i18n="sec.impact.super">Combined Impact</span>
+      </div>
+      <div class="impact-grid fade-in">
+        <div class="impact-item">
+          <span class="impact-icon">🗓️</span>
+          <span class="impact-num impact-num-w" data-count="30" data-suffix="+">30+</span>
+          <span class="impact-desc" data-i18n="impact.years">Years Combined Experience</span>
+        </div>
+        <div class="impact-item">
+          <span class="impact-icon">🚀</span>
+          <span class="impact-num impact-num-d" data-count="50" data-suffix="+">50+</span>
+          <span class="impact-desc" data-i18n="impact.projects">Projects Successfully Delivered</span>
+        </div>
+        <div class="impact-item">
+          <span class="impact-icon">🏆</span>
+          <span class="impact-num impact-num-a" data-count="2" data-suffix="">2</span>
+          <span class="impact-desc" data-i18n="impact.iso">ISO Standards Covered</span>
+        </div>
+        <div class="impact-item">
+          <span class="impact-icon">🤝</span>
+          <span class="impact-num impact-num-w" data-count="30" data-suffix="+">30+</span>
+          <span class="impact-desc" data-i18n="impact.clients">Happy Clients Served</span>
+        </div>
+      </div>
+    </div>
   </section>
 
 
@@ -551,7 +763,7 @@
         </div>
         <div class="cards-stack">
 
-          <div class="card">
+          <div class="card card-d">
             <div class="card-icon card-icon-d">☁️</div>
             <div class="card-title" data-i18n="svc.d1.title">Azure Cloud Infrastructure</div>
             <p class="card-desc" data-i18n="svc.d1.desc">Design, migration and ongoing management of scalable, secure Azure environments — from IaaS to serverless, optimised for performance and cost.</p>
@@ -563,7 +775,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-d">
             <div class="card-icon card-icon-d">🖥️</div>
             <div class="card-title" data-i18n="svc.d2.title">Microsoft 365 &amp; Modern Workplace</div>
             <p class="card-desc" data-i18n="svc.d2.desc">End-to-end M365 deployment, governance and adoption — Teams, SharePoint, Exchange Online, Intune, and Entra ID.</p>
@@ -575,7 +787,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-d">
             <div class="card-icon card-icon-d">⚡</div>
             <div class="card-title" data-i18n="svc.d3.title">Automation &amp; Scripting</div>
             <p class="card-desc" data-i18n="svc.d3.desc">Eliminating manual overhead with PowerShell, Ansible, Azure Automation and Logic Apps — tailored to your workflows.</p>
@@ -586,7 +798,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-d">
             <div class="card-icon card-icon-d">🏗️</div>
             <div class="card-title" data-i18n="svc.d4.title">Windows Infrastructure</div>
             <p class="card-desc" data-i18n="svc.d4.desc">On-premises and hybrid Windows Server environments — Active Directory, Hyper-V virtualisation, and infrastructure hardening.</p>
@@ -608,7 +820,7 @@
         </div>
         <div class="cards-stack">
 
-          <div class="card">
+          <div class="card card-a">
             <div class="card-icon card-icon-a">📋</div>
             <div class="card-title" data-i18n="svc.a1.title">Project Management</div>
             <p class="card-desc" data-i18n="svc.a1.desc">Structured delivery of complex, multi-stakeholder projects — on time, within budget, and aligned with business goals. PRINCE2 and Agile methodologies.</p>
@@ -619,7 +831,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-a">
             <div class="card-icon card-icon-a">🔍</div>
             <div class="card-title" data-i18n="svc.a2.title">Internal Audit — ISO 27001</div>
             <p class="card-desc" data-i18n="svc.a2.desc">Information security management system audits, gap analysis, and certification preparation. Helping organisations protect data and meet compliance requirements.</p>
@@ -630,7 +842,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-a">
             <div class="card-icon card-icon-a">✅</div>
             <div class="card-title" data-i18n="svc.a3.title">Quality Audit — ISO 9001</div>
             <p class="card-desc" data-i18n="svc.a3.desc">Quality management system implementation, internal auditing, and process compliance. Supporting organisations in achieving and maintaining ISO 9001 certification.</p>
@@ -641,7 +853,7 @@
             </div>
           </div>
 
-          <div class="card">
+          <div class="card card-a">
             <div class="card-icon card-icon-a">🔄</div>
             <div class="card-title" data-i18n="svc.a4.title">Business Process Management</div>
             <p class="card-desc" data-i18n="svc.a4.desc">End-to-end process analysis, optimisation and documentation. Identifying inefficiencies and delivering structured improvements that stick.</p>
@@ -653,6 +865,50 @@
           </div>
 
         </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══ HOW WE WORK ═══════════════════════════════════════ -->
+  <section id="process">
+    <div class="section-header">
+      <span class="section-super fade-in" data-i18n="sec.process.super">Our Approach</span>
+      <h2 class="section-title fade-in" data-i18n="sec.process.title">How We Work</h2>
+      <p class="section-sub fade-in" data-i18n="sec.process.sub">A proven three-step approach that turns your challenges into lasting solutions.</p>
+    </div>
+
+    <div class="process-track fade-in">
+
+      <div class="process-step">
+        <div class="process-num process-num-1">🎯</div>
+        <div class="process-step-title" data-i18n="proc.1.title">Discover</div>
+        <div class="process-step-desc" data-i18n="proc.1.desc">We listen carefully to understand your goals, constraints, and current state — before proposing anything.</div>
+      </div>
+
+      <div class="process-connector">
+        <svg width="48" height="12" viewBox="0 0 48 12" fill="none">
+          <path d="M0 6 H38 M34 2 L42 6 L34 10" stroke="#cbd5e1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num process-num-2">📐</div>
+        <div class="process-step-title" data-i18n="proc.2.title">Design</div>
+        <div class="process-step-desc" data-i18n="proc.2.desc">Technology meets methodology — we co-design a tailored plan that combines Dawid's tech expertise with Agnieszka's management rigour.</div>
+      </div>
+
+      <div class="process-connector">
+        <svg width="48" height="12" viewBox="0 0 48 12" fill="none">
+          <path d="M0 6 H38 M34 2 L42 6 L34 10" stroke="#cbd5e1" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="process-step">
+        <div class="process-num process-num-3">🚀</div>
+        <div class="process-step-title" data-i18n="proc.3.title">Deliver</div>
+        <div class="process-step-desc" data-i18n="proc.3.desc">We execute with precision, keep you informed at every step, and ensure the solution runs smoothly long after handover.</div>
       </div>
 
     </div>
@@ -673,19 +929,55 @@
           <div class="col-dot col-dot-d"></div>
           <span class="col-label" data-i18n="col.tech">Technology Stack</span>
         </div>
-        <div class="skills-grid">
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Microsoft Azure</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Microsoft 365</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>PowerShell</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Ansible</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Windows Server</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Entra ID / AD</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Microsoft Intune</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>SharePoint</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Azure DevOps</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Terraform</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>Hyper-V</div>
-          <div class="skill-pill skill-pill-d"><span class="skill-dot skill-dot-d"></span>GitHub Actions</div>
+        <div class="skill-bars-col">
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Microsoft Azure</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Microsoft 365</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">PowerShell</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="92"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Windows Server</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="93"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Entra ID / Active Directory</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Microsoft Intune</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="87"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Terraform / IaC</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="82"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Ansible</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="80"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Azure DevOps</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="84"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">GitHub Actions</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="79"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">SharePoint</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="85"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Hyper-V</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-d" data-width="86"></div></div>
+          </div>
         </div>
       </div>
 
@@ -694,19 +986,55 @@
           <div class="col-dot col-dot-a"></div>
           <span class="col-label" data-i18n="col.mgmt">Management &amp; Audit Toolkit</span>
         </div>
-        <div class="skills-grid">
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>ISO 27001</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>ISO 9001</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>PRINCE2</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Agile / Scrum</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Risk Management</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Business Analysis</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Process Mapping</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Gap Analysis</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Compliance Mgmt</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>Audit Planning</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>ISMS</div>
-          <div class="skill-pill skill-pill-a"><span class="skill-dot skill-dot-a"></span>QMS</div>
+        <div class="skill-bars-col">
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">ISO 27001</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="96"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">ISO 9001</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">PRINCE2</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="92"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Process Mapping</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="93"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Risk Management</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="91"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Gap Analysis</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Audit Planning</span><span class="skill-bar-level" data-i18n="skill.expert">Expert</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="91"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">ISMS</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="88"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">QMS</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="88"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Agile / Scrum</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="85"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Business Analysis</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="86"></div></div>
+          </div>
+          <div class="skill-bar-row">
+            <div class="skill-bar-meta"><span class="skill-bar-name">Compliance Management</span><span class="skill-bar-level" data-i18n="skill.advanced">Advanced</span></div>
+            <div class="skill-bar-track"><div class="skill-bar-fill skill-bar-fill-a" data-width="87"></div></div>
+          </div>
         </div>
       </div>
 
@@ -776,6 +1104,7 @@
     const i18n = {
       en: {
         'nav.services':       'Services',
+        'nav.process':        'How We Work',
         'nav.expertise':      'Expertise',
         'nav.contact':        'Contact',
         'nav.btn.dawid':      'Dawid',
@@ -794,6 +1123,12 @@
         'hero.a.tagline':'Driving organisational excellence through structured project delivery, ISO compliance, and business process optimisation.',
         'hero.a.stat1':  'Years Experience',
         'hero.a.cta':    'Contact Agnieszka →',
+
+        'sec.impact.super':  'Combined Impact',
+        'impact.years':      'Years Combined Experience',
+        'impact.projects':   'Projects Successfully Delivered',
+        'impact.iso':        'ISO Standards Covered',
+        'impact.clients':    'Happy Clients Served',
 
         'sec.services.super': 'What We Do',
         'sec.services.title': 'Our Services',
@@ -819,10 +1154,22 @@
         'svc.a4.title': 'Business Process Management',
         'svc.a4.desc':  'End-to-end process analysis, optimisation and documentation. Identifying inefficiencies and delivering structured improvements that stick.',
 
+        'sec.process.super': 'Our Approach',
+        'sec.process.title': 'How We Work',
+        'sec.process.sub':   'A proven three-step approach that turns your challenges into lasting solutions.',
+        'proc.1.title': 'Discover',
+        'proc.1.desc':  'We listen carefully to understand your goals, constraints, and current state — before proposing anything.',
+        'proc.2.title': 'Design',
+        'proc.2.desc':  'Technology meets methodology — we co-design a tailored plan combining tech expertise with management rigour.',
+        'proc.3.title': 'Deliver',
+        'proc.3.desc':  'We execute with precision, keep you informed at every step, and ensure the solution runs smoothly long after handover.',
+
         'sec.exp.super': 'Skills & Tools',
         'sec.exp.title': 'Expertise',
         'col.tech':  'Technology Stack',
         'col.mgmt':  'Management & Audit Toolkit',
+        'skill.expert':   'Expert',
+        'skill.advanced': 'Advanced',
 
         'sec.contact.super': 'Get In Touch',
         'sec.contact.title': "Let's Work Together",
@@ -836,6 +1183,7 @@
 
       pl: {
         'nav.services':       'Usługi',
+        'nav.process':        'Jak Pracujemy',
         'nav.expertise':      'Ekspertyza',
         'nav.contact':        'Kontakt',
         'nav.btn.dawid':      'Dawid',
@@ -854,6 +1202,12 @@
         'hero.a.tagline':'Napędzam doskonałość organizacyjną przez ustrukturyzowane zarządzanie projektami, zgodność ISO i optymalizację procesów biznesowych.',
         'hero.a.stat1':  'Lat Doświadczenia',
         'hero.a.cta':    'Napisz do Agnieszki →',
+
+        'sec.impact.super':  'Łączny Dorobek',
+        'impact.years':      'Lat Łącznego Doświadczenia',
+        'impact.projects':   'Projektów Zrealizowanych',
+        'impact.iso':        'Standardy ISO w Zasięgu',
+        'impact.clients':    'Zadowolonych Klientów',
 
         'sec.services.super': 'Co Robimy',
         'sec.services.title': 'Nasze Usługi',
@@ -879,10 +1233,22 @@
         'svc.a4.title': 'Zarządzanie Procesami Biznesowymi',
         'svc.a4.desc':  'Kompleksowa analiza, optymalizacja i dokumentacja procesów. Identyfikacja nieefektywności i wdrożenie trwałych usprawnień strukturalnych.',
 
+        'sec.process.super': 'Nasze Podejście',
+        'sec.process.title': 'Jak Pracujemy',
+        'sec.process.sub':   'Sprawdzony trzyetapowy proces, który zamienia wyzwania w trwałe rozwiązania.',
+        'proc.1.title': 'Odkrywamy',
+        'proc.1.desc':  'Słuchamy uważnie, aby zrozumieć Twoje cele, ograniczenia i aktualny stan — zanim cokolwiek zaproponujemy.',
+        'proc.2.title': 'Projektujemy',
+        'proc.2.desc':  'Technologia spotyka metodologię — wspólnie projektujemy plan łączący ekspertyzę techniczną z rygorem zarządzania.',
+        'proc.3.title': 'Dostarczamy',
+        'proc.3.desc':  'Działamy precyzyjnie, informujemy Cię na każdym etapie i dbamy o sprawne działanie rozwiązania długo po odbiorze.',
+
         'sec.exp.super': 'Umiejętności i Narzędzia',
         'sec.exp.title': 'Ekspertyza',
         'col.tech':  'Stos Technologiczny',
         'col.mgmt':  'Narzędzia Zarządzania i Audytu',
+        'skill.expert':   'Ekspert',
+        'skill.advanced': 'Zaawansowany',
 
         'sec.contact.super': 'Skontaktuj się',
         'sec.contact.title': 'Współpracujmy',
@@ -908,7 +1274,6 @@
         if (val !== undefined) el.textContent = val;
       });
 
-      // Sync both desktop + mobile lang buttons
       ['en','pl'].forEach(l => {
         document.querySelectorAll('#btn-' + l + ', #btn-' + l + '-m').forEach(btn => {
           btn.classList.toggle('active', l === lang);
@@ -930,17 +1295,51 @@
       mobileNav.classList.remove('open');
     }
 
-    /* ── Scroll fade-in ─────────────────────────────────── */
+    /* ── CountUp animation ──────────────────────────────── */
+    function animateCount(el, target, suffix, duration) {
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const value = Math.round(eased * target);
+        el.textContent = value + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      };
+      requestAnimationFrame(update);
+    }
+
+    /* ── Scroll fade-in + counter + skill bars ──────────── */
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
 
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        /* Animate counters inside this element */
+        e.target.querySelectorAll('[data-count]').forEach(el => {
+          const target = parseInt(el.dataset.count, 10);
+          const suffix = el.dataset.suffix ?? '';
+          animateCount(el, target, suffix, 1400);
+        });
+
+        /* Animate skill bars inside this element */
+        e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+
+        observer.unobserve(e.target);
+      });
+    }, { threshold: 0.12 });
+
+    /* Also observe impact stat items individually for stagger */
+    document.querySelectorAll('.fade-in, .impact-item').forEach(el => observer.observe(el));
+
+    /* Hero counters fire immediately on load (already visible) */
+    document.querySelectorAll('.hero-stats [data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count, 10);
+      const suffix = el.dataset.suffix ?? '';
+      setTimeout(() => animateCount(el, target, suffix, 1600), 400);
+    });
   </script>
 
 </body>
